@@ -1,2 +1,3 @@
-__all__ = ["server.py",
-           "client.py"]
+__all__ = ["server",
+           "client",
+           "paths"]

@@ -1,6 +1,7 @@
 import socket
 import logging
 import sys
+import json
 
 logging.basicConfig(level=logging.INFO, filename="client.log",
                     filemode='a+', format="%(levelname)s %(asctime)s: %(message)s")
@@ -33,8 +34,13 @@ class Client(object):
         self._send_message(data)
         print(self._receive_message())
 
+    def auth(self, username: str):
+        self.__client.send(json.dumps({'username': username}).encode())
+        print(self.__client.recv(1024).decode())
+
 
 if __name__ == "__main__":
     c = Client(input('Host: '), int(input('Port: ')))
+    c.auth(input('Username: '))
     while True:
-        c.run(input('::'))
+        c.run(input(':: '))
